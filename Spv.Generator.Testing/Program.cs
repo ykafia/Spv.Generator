@@ -16,8 +16,8 @@ namespace Spv.Generator.Testing
                 SetMemoryModel(AddressingModel.Logical, MemoryModel.Simple);
 
                 Instruction floatType = TypeFloat(32);
-                Instruction floatInputType = TypePointer(StorageClass.Input, floatType);
-                Instruction floatOutputType = TypePointer(StorageClass.Output, floatType);
+                Instruction floatInputType = TypePointer(StorageClass.Input, floatType, true);
+                Instruction floatOutputType = TypePointer(StorageClass.Output, floatType, true);
                 Instruction vec4Type = TypeVector(floatType, 4);
                 Instruction vec4OutputPtrType = TypePointer(StorageClass.Output, vec4Type);
 
@@ -66,9 +66,7 @@ namespace Spv.Generator.Testing
 
             byte[] ModuleData = module.Generate();
 
-            File.WriteAllBytes(Args[0], ModuleData);
-
-            Console.WriteLine(Args[0]);
+            File.WriteAllBytes("./shader.spv", ModuleData);
         }
     }
 }
